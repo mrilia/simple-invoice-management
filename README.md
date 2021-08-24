@@ -1,2 +1,2 @@
-# simple-invoice-management
+# Simple Invoice Management
 This project created as an assessment
