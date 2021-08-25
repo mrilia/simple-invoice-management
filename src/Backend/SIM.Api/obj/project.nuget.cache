@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "8b9VWzJ4Rxs9fxlu5Ft7FQumZpFHhKzVLyOcorgT4kPH9RthGGVSyQg+syguEXVmwyPly7oL/bK6uQYmNDz4qw==",
+  "dgSpecHash": "nVFnl5GBCFB8UKZJZhnaotCggmvunp9kkrlUaFErDNKN9a0LTOlm31b8gtoK0xl4TCmOofij60d/iifeFkaB6Q==",
   "success": true,
   "projectFilePath": "D:\\projects\\simple-invoice-management\\src\\Backend\\SIM.Api\\SIM.Api.csproj",
   "expectedPackageFiles": [

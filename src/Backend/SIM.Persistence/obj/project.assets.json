@@ -1,11 +1,49 @@
 {
   "version": 3,
   "targets": {
-    "net5.0": {}
+    "net5.0": {
+      "SIM.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "SIM.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/SIM.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SIM.Application.dll": {}
+        }
+      },
+      "SIM.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/SIM.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SIM.Domain.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "SIM.Application/1.0.0": {
+      "type": "project",
+      "path": "../SIM.Application/SIM.Application.csproj",
+      "msbuildProject": "../SIM.Application/SIM.Application.csproj"
+    },
+    "SIM.Domain/1.0.0": {
+      "type": "project",
+      "path": "../SIM.Domain/SIM.Domain.csproj",
+      "msbuildProject": "../SIM.Domain/SIM.Domain.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net5.0": []
+    "net5.0": [
+      "SIM.Application >= 1.0.0",
+      "SIM.Domain >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\mrilia\\.nuget\\packages\\": {},
@@ -41,7 +79,14 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\projects\\simple-invoice-management\\src\\Backend\\SIM.Application\\SIM.Application.csproj": {
+              "projectPath": "D:\\projects\\simple-invoice-management\\src\\Backend\\SIM.Application\\SIM.Application.csproj"
+            },
+            "D:\\projects\\simple-invoice-management\\src\\Backend\\SIM.Domain\\SIM.Domain.csproj": {
+              "projectPath": "D:\\projects\\simple-invoice-management\\src\\Backend\\SIM.Domain\\SIM.Domain.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

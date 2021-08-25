@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net5.0": {}
+    "net5.0": {
+      "SIM.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/SIM.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SIM.Domain.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "SIM.Domain/1.0.0": {
+      "type": "project",
+      "path": "../SIM.Domain/SIM.Domain.csproj",
+      "msbuildProject": "../SIM.Domain/SIM.Domain.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net5.0": []
+    "net5.0": [
+      "SIM.Domain >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\mrilia\\.nuget\\packages\\": {},
@@ -41,7 +60,11 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\projects\\simple-invoice-management\\src\\Backend\\SIM.Domain\\SIM.Domain.csproj": {
+              "projectPath": "D:\\projects\\simple-invoice-management\\src\\Backend\\SIM.Domain\\SIM.Domain.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

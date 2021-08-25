@@ -82,6 +82,43 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
+      },
+      "SIM.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "SIM.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/SIM.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SIM.Application.dll": {}
+        }
+      },
+      "SIM.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/SIM.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SIM.Domain.dll": {}
+        }
+      },
+      "SIM.Persistence/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "SIM.Application": "1.0.0",
+          "SIM.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/SIM.Persistence.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SIM.Persistence.dll": {}
+        }
       }
     }
   },
@@ -271,11 +308,28 @@
         "swashbuckle.aspnetcore.swaggerui.5.6.3.nupkg.sha512",
         "swashbuckle.aspnetcore.swaggerui.nuspec"
       ]
+    },
+    "SIM.Application/1.0.0": {
+      "type": "project",
+      "path": "../SIM.Application/SIM.Application.csproj",
+      "msbuildProject": "../SIM.Application/SIM.Application.csproj"
+    },
+    "SIM.Domain/1.0.0": {
+      "type": "project",
+      "path": "../SIM.Domain/SIM.Domain.csproj",
+      "msbuildProject": "../SIM.Domain/SIM.Domain.csproj"
+    },
+    "SIM.Persistence/1.0.0": {
+      "type": "project",
+      "path": "../SIM.Persistence/SIM.Persistence.csproj",
+      "msbuildProject": "../SIM.Persistence/SIM.Persistence.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
       "Microsoft.VisualStudio.Azure.Containers.Tools.Targets >= 1.11.1",
+      "SIM.Application >= 1.0.0",
+      "SIM.Persistence >= 1.0.0",
       "Swashbuckle.AspNetCore >= 5.6.3"
     ]
   },
@@ -313,7 +367,14 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\projects\\simple-invoice-management\\src\\Backend\\SIM.Application\\SIM.Application.csproj": {
+              "projectPath": "D:\\projects\\simple-invoice-management\\src\\Backend\\SIM.Application\\SIM.Application.csproj"
+            },
+            "D:\\projects\\simple-invoice-management\\src\\Backend\\SIM.Persistence\\SIM.Persistence.csproj": {
+              "projectPath": "D:\\projects\\simple-invoice-management\\src\\Backend\\SIM.Persistence\\SIM.Persistence.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
