@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "dgSpecHash": "xcpysXL7JQnK4g+7gn74TOPQw4UuLznoBDoUWLpiAJXCTWfz99TO/A/pTAg7aXWo6UjdYGVlhPCxGXxSuvnNXg==",
-  "success": false,
+  "dgSpecHash": "YVSiTuNolkSGGc0NB7o9SZ2yHSkH3qGDzVHSBChrzxYDEMFxDYPzcM7kIqQw8LGvOS9FUQGFkaOvogeROfOykA==",
+  "success": true,
   "projectFilePath": "D:\\projects\\simple-invoice-management\\src\\Backend\\SIM.UnitTest\\SIM.UnitTest.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mrilia\\.nuget\\packages\\coverlet.collector\\3.0.2\\coverlet.collector.3.0.2.nupkg.sha512",
@@ -159,24 +159,5 @@
     "C:\\Users\\mrilia\\.nuget\\packages\\xunit.extensibility.execution\\2.4.1\\xunit.extensibility.execution.2.4.1.nupkg.sha512",
     "C:\\Users\\mrilia\\.nuget\\packages\\xunit.runner.visualstudio\\2.4.3\\xunit.runner.visualstudio.2.4.3.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1104",
-      "level": "Error",
-      "message": "Unable to find project 'D:\\projects\\simple-invoice-management\\src\\Backend\\Backend\\SIM.Api\\SIM.Api.csproj'. Check that the project reference is valid and that the project file exists.",
-      "libraryId": "D:\\projects\\simple-invoice-management\\src\\Backend\\Backend\\SIM.Api\\SIM.Api.csproj",
-      "targetGraphs": [
-        "net5.0"
-      ]
-    },
-    {
-      "code": "NU1104",
-      "level": "Error",
-      "message": "Unable to find project 'D:\\projects\\simple-invoice-management\\src\\Backend\\Backend\\SIM.Application\\SIM.Application.csproj'. Check that the project reference is valid and that the project file exists.",
-      "libraryId": "D:\\projects\\simple-invoice-management\\src\\Backend\\Backend\\SIM.Application\\SIM.Application.csproj",
-      "targetGraphs": [
-        "net5.0"
-      ]
-    }
-  ]
+  "logs": []
 }

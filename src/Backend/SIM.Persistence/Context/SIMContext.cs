@@ -30,11 +30,8 @@ namespace SIM.Persistence.Context
 
 
         public Task SaveAsync() =>  base.SaveChangesAsync();
-
         public Task CloseConnection() => base.Database.CloseConnectionAsync();
-
         public void Save() => base.SaveChanges();
-
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(SIMContext).Assembly);
     }

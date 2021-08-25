@@ -1,5 +1,0 @@
-D:\projects\simple-invoice-management\src\Backend\SIM.Persistence\obj\Debug\net5.0\SIM.Persistence.csproj.AssemblyReference.cache
-D:\projects\simple-invoice-management\src\Backend\SIM.Persistence\obj\Debug\net5.0\SIM.Persistence.GeneratedMSBuildEditorConfig.editorconfig
-D:\projects\simple-invoice-management\src\Backend\SIM.Persistence\obj\Debug\net5.0\SIM.Persistence.AssemblyInfoInputs.cache
-D:\projects\simple-invoice-management\src\Backend\SIM.Persistence\obj\Debug\net5.0\SIM.Persistence.AssemblyInfo.cs
-D:\projects\simple-invoice-management\src\Backend\SIM.Persistence\obj\Debug\net5.0\SIM.Persistence.csproj.CoreCompileInputs.cache

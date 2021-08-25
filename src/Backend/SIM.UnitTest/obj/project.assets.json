@@ -8860,8 +8860,6 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
-      "D:\\projects\\simple-invoice-management\\src\\Backend\\Backend\\SIM.Api\\SIM.Api.csproj",
-      "D:\\projects\\simple-invoice-management\\src\\Backend\\Backend\\SIM.Application\\SIM.Application.csproj",
       "Microsoft.NET.Test.Sdk >= 16.9.4",
       "SIM.Api >= 1.0.0",
       "SIM.Application >= 1.0.0",
@@ -8905,12 +8903,6 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "D:\\projects\\simple-invoice-management\\src\\Backend\\Backend\\SIM.Api\\SIM.Api.csproj": {
-              "projectPath": "D:\\projects\\simple-invoice-management\\src\\Backend\\Backend\\SIM.Api\\SIM.Api.csproj"
-            },
-            "D:\\projects\\simple-invoice-management\\src\\Backend\\Backend\\SIM.Application\\SIM.Application.csproj": {
-              "projectPath": "D:\\projects\\simple-invoice-management\\src\\Backend\\Backend\\SIM.Application\\SIM.Application.csproj"
-            },
             "D:\\projects\\simple-invoice-management\\src\\Backend\\SIM.Api\\SIM.Api.csproj": {
               "projectPath": "D:\\projects\\simple-invoice-management\\src\\Backend\\SIM.Api\\SIM.Api.csproj"
             },
@@ -8969,25 +8961,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1104",
-      "level": "Error",
-      "message": "Unable to find project 'D:\\projects\\simple-invoice-management\\src\\Backend\\Backend\\SIM.Api\\SIM.Api.csproj'. Check that the project reference is valid and that the project file exists.",
-      "libraryId": "D:\\projects\\simple-invoice-management\\src\\Backend\\Backend\\SIM.Api\\SIM.Api.csproj",
-      "targetGraphs": [
-        "net5.0"
-      ]
-    },
-    {
-      "code": "NU1104",
-      "level": "Error",
-      "message": "Unable to find project 'D:\\projects\\simple-invoice-management\\src\\Backend\\Backend\\SIM.Application\\SIM.Application.csproj'. Check that the project reference is valid and that the project file exists.",
-      "libraryId": "D:\\projects\\simple-invoice-management\\src\\Backend\\Backend\\SIM.Application\\SIM.Application.csproj",
-      "targetGraphs": [
-        "net5.0"
-      ]
-    }
-  ]
+  }
 }
