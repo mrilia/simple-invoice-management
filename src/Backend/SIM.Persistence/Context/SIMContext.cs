@@ -11,7 +11,7 @@ using SIM.Domain.Models.Invoice;
 
 namespace SIM.Persistence.Context
 {
-    class SIMContext : DbContext, ISIMContext
+    public class SIMContext : DbContext, ISIMContext
     {
         public SIMContext()
         {

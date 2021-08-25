@@ -20,15 +20,23 @@ namespace SIM.Api.Installer
         public void InstallServices(IConfiguration configuration, IServiceCollection services)
         {
             services.AddMemoryCache();
-            services.AddCors();
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
 
             services.AddControllers(opt => opt.Filters.Add<OnExceptionMiddleware>())
                 .AddFluentValidation(mvcConfiguration =>
                     mvcConfiguration.RegisterValidatorsFromAssemblyContaining<ISIMContext>());
 
+
             var mappingConfig = new MapperConfiguration(mc => { mc.AddProfile(new MappingProfile()); });
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
+
 
             services.AddSwaggerGen(options =>
             {

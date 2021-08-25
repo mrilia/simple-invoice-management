@@ -5,14 +5,13 @@ using SIM.Domain.Models.Item;
 
 namespace SIM.Persistence.Configurations.Invoice
 {
-    class InvoiceRowConfiguration : IEntityTypeConfiguration<Domain.Models.Invoice.InvoiceRow>
+    class InvoiceRowConfiguration : IEntityTypeConfiguration<InvoiceRow>
     {
-        public void Configure(EntityTypeBuilder<Domain.Models.Invoice.InvoiceRow> builder)
+        public void Configure(EntityTypeBuilder<InvoiceRow> builder)
         {
             builder.Property(e => e.Id).IsRequired().UseIdentityColumn();
             builder.HasKey(e => e.Id);
             builder.Property(e => e.InvoiceId).IsRequired();
-            builder.Property(e => e.ItemId).IsRequired();
             builder.Property(e => e.ItemName).IsRequired();
             builder.Property(e => e.Quantity).IsRequired();
             builder.Property(e => e.Fee).IsRequired();
@@ -26,10 +25,6 @@ namespace SIM.Persistence.Configurations.Invoice
             builder.HasOne(e => e.Invoice)
                 .WithMany(e=>e.InvoiceRows)
                 .HasForeignKey(e=>e.InvoiceId);
-
-            builder.HasOne(e => e.Item)
-                .WithMany(e => e.ItemsInInvoices)
-                .HasForeignKey(e => e.ItemId);
         }
     }
 }

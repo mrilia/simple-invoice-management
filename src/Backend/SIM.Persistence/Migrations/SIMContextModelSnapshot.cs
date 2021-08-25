@@ -80,9 +80,6 @@ namespace SIM.Persistence.Migrations
                     b.Property<long>("InvoiceId")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("ItemId")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("ItemName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -103,8 +100,6 @@ namespace SIM.Persistence.Migrations
 
                     b.HasIndex("InvoiceId");
 
-                    b.HasIndex("ItemId");
-
                     b.ToTable("InvoiceRow");
                 });
 
@@ -119,9 +114,6 @@ namespace SIM.Persistence.Migrations
 
                     b.Property<long>("Fee")
                         .HasColumnType("bigint");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -140,25 +132,12 @@ namespace SIM.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SIM.Domain.Models.Item.Item", "Item")
-                        .WithMany("ItemsInInvoices")
-                        .HasForeignKey("ItemId")
-                        .OnDelete(DeleteBehavior.SetNull)
-                        .IsRequired();
-
                     b.Navigation("Invoice");
-
-                    b.Navigation("Item");
                 });
 
             modelBuilder.Entity("SIM.Domain.Models.Invoice.Invoice", b =>
                 {
                     b.Navigation("InvoiceRows");
-                });
-
-            modelBuilder.Entity("SIM.Domain.Models.Item.Item", b =>
-                {
-                    b.Navigation("ItemsInInvoices");
                 });
 #pragma warning restore 612, 618
         }

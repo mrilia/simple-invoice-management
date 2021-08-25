@@ -11,12 +11,6 @@ namespace SIM.Persistence.Configurations.Item
             builder.HasKey(e => e.Id);
             builder.Property(e => e.Name).IsRequired();
             builder.Property(e => e.Fee).IsRequired();
-
-            builder.HasMany(e => e.ItemsInInvoices)
-                .WithOne(e => e.Item)
-                .HasForeignKey(e => e.ItemId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }

@@ -1,15 +1,10 @@
-using System.IO;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using SIM.Api.Installer;
-using SIM.Api.Middleware;
 using SIM.Application;
-using SIM.Application.Interfaces;
 using SIM.Persistence;
 
 namespace SIM.Api
@@ -44,6 +39,7 @@ namespace SIM.Api
 
             app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseCors("MyPolicy");
             //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

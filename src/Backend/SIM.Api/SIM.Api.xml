@@ -4,6 +4,27 @@
         <name>SIM.Api</name>
     </assembly>
     <members>
+        <member name="M:SIM.Api.Controllers.Item.ItemController.AddNew(SIM.Application.Handlers.Items.Command.AddNewItem.AddNewItemCommand,System.Threading.CancellationToken)">
+            <summary>
+            Add new item
+            </summary>
+            <param name="addNewItemCommand"></param>
+            <param name="cancellationToken"></param>
+            <response code="201">if create item successfully </response>
+            <response code="400">If Validation Failed</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:SIM.Api.Controllers.Item.ItemController.Get(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            List Of Items
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <returns> Item list</returns>
+            <response code="200">if every thing is ok </response>
+            <response code="404">If item not found</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
         <member name="T:SIM.Api.Middleware.OnExceptionMiddleware">
             <summary>
              OnExceptionMiddleware , Produce Custom message during Internal Server Exception

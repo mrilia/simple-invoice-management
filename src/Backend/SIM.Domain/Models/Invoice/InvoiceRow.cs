@@ -11,7 +11,6 @@ namespace SIM.Domain.Models.Invoice
     {
         public long Id { get; set; }
         public long InvoiceId { get; set; }
-        public long ItemId { get; set; }
         public string ItemName { get; set; }
         public int Quantity { get; set; }
         public long Fee { get; set; }
@@ -23,6 +22,5 @@ namespace SIM.Domain.Models.Invoice
         public long TotalDiscountPrice { get; set; }
 
         public virtual Invoice Invoice { get; set; }
-        public virtual Item.Item Item { get; set; }
     }
 }

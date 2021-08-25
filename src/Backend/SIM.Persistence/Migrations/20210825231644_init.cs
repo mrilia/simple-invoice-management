@@ -32,8 +32,7 @@ namespace SIM.Persistence.Migrations
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Fee = table.Column<long>(type: "bigint", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                    Fee = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -47,7 +46,6 @@ namespace SIM.Persistence.Migrations
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     InvoiceId = table.Column<long>(type: "bigint", nullable: false),
-                    ItemId = table.Column<long>(type: "bigint", nullable: false),
                     ItemName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     Fee = table.Column<long>(type: "bigint", nullable: false),
@@ -67,23 +65,12 @@ namespace SIM.Persistence.Migrations
                         principalTable: "Invoices",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_InvoiceRow_Items_ItemId",
-                        column: x => x.ItemId,
-                        principalTable: "Items",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_InvoiceRow_InvoiceId",
                 table: "InvoiceRow",
                 column: "InvoiceId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_InvoiceRow_ItemId",
-                table: "InvoiceRow",
-                column: "ItemId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -92,10 +79,10 @@ namespace SIM.Persistence.Migrations
                 name: "InvoiceRow");
 
             migrationBuilder.DropTable(
-                name: "Invoices");
+                name: "Items");
 
             migrationBuilder.DropTable(
-                name: "Items");
+                name: "Invoices");
         }
     }
 }

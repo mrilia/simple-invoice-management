@@ -16,7 +16,6 @@
     <Folder Include="Handlers\Invoices\Queries\" />
     <Folder Include="Handlers\Items\Command\DeleteItem\" />
     <Folder Include="Handlers\Items\Command\UpdateItem\" />
-    <Folder Include="Handlers\Items\Queries\" />
     <Folder Include="Validators\Invoices\" />
   </ItemGroup>
 
