@@ -22,6 +22,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Backend\SIM.Api\SIM.Api.csproj" />
     <ProjectReference Include="..\Backend\SIM.Application\SIM.Application.csproj" />
+    <ProjectReference Include="..\SIM.Api\SIM.Api.csproj" />
+    <ProjectReference Include="..\SIM.Application\SIM.Application.csproj" />
   </ItemGroup>
 
 </Project>
