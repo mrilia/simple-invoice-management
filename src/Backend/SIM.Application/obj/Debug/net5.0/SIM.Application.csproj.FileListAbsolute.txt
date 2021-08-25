@@ -1,0 +1,15 @@
+D:\projects\simple-invoice-management\src\Backend\SIM.Application\bin\Debug\net5.0\SIM.Application.deps.json
+D:\projects\simple-invoice-management\src\Backend\SIM.Application\bin\Debug\net5.0\SIM.Application.dll
+D:\projects\simple-invoice-management\src\Backend\SIM.Application\bin\Debug\net5.0\ref\SIM.Application.dll
+D:\projects\simple-invoice-management\src\Backend\SIM.Application\bin\Debug\net5.0\SIM.Application.pdb
+D:\projects\simple-invoice-management\src\Backend\SIM.Application\bin\Debug\net5.0\SIM.Domain.dll
+D:\projects\simple-invoice-management\src\Backend\SIM.Application\bin\Debug\net5.0\SIM.Domain.pdb
+D:\projects\simple-invoice-management\src\Backend\SIM.Application\obj\Debug\net5.0\SIM.Application.csproj.AssemblyReference.cache
+D:\projects\simple-invoice-management\src\Backend\SIM.Application\obj\Debug\net5.0\SIM.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\projects\simple-invoice-management\src\Backend\SIM.Application\obj\Debug\net5.0\SIM.Application.AssemblyInfoInputs.cache
+D:\projects\simple-invoice-management\src\Backend\SIM.Application\obj\Debug\net5.0\SIM.Application.AssemblyInfo.cs
+D:\projects\simple-invoice-management\src\Backend\SIM.Application\obj\Debug\net5.0\SIM.Application.csproj.CoreCompileInputs.cache
+D:\projects\simple-invoice-management\src\Backend\SIM.Application\obj\Debug\net5.0\SIM.Application.csproj.CopyComplete
+D:\projects\simple-invoice-management\src\Backend\SIM.Application\obj\Debug\net5.0\SIM.Application.dll
+D:\projects\simple-invoice-management\src\Backend\SIM.Application\obj\Debug\net5.0\ref\SIM.Application.dll
+D:\projects\simple-invoice-management\src\Backend\SIM.Application\obj\Debug\net5.0\SIM.Application.pdb
