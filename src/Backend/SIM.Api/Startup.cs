@@ -1,16 +1,16 @@
+using System.IO;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using SIM.Api.Installer;
+using SIM.Api.Middleware;
+using SIM.Application;
+using SIM.Application.Interfaces;
+using SIM.Persistence;
 
 namespace SIM.Api
 {
@@ -27,11 +27,9 @@ namespace SIM.Api
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "SIM.Api", Version = "v1" });
-            });
+            services.InstallServicesAssembly(Configuration);
+            services.AddApplication();
+            services.AddPersistence(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,10 +43,8 @@ namespace SIM.Api
             }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
-            app.UseAuthorization();
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

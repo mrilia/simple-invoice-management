@@ -18,7 +18,6 @@ namespace SIM.Domain.Models.Item
         public string Name { get; set; }        
         public long Fee { get; set; }
 
-        public bool IsDeleted { get; set; }
         public virtual ICollection<InvoiceRow> ItemsInInvoices { get; }
     }
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SIM.Api</name>
+    </assembly>
+    <members>
+        <member name="T:SIM.Api.Middleware.OnExceptionMiddleware">
+            <summary>
+             OnExceptionMiddleware , Produce Custom message during Internal Server Exception
+            </summary>
+        </member>
+        <member name="M:SIM.Api.Middleware.OnExceptionMiddleware.#ctor(Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="env"></param>
+        </member>
+        <member name="M:SIM.Api.Middleware.OnExceptionMiddleware.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>
