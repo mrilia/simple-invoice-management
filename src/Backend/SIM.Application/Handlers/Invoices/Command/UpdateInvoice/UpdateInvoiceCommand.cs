@@ -20,6 +20,7 @@ namespace SIM.Application.Handlers.Invoices.Command.Update
 
     public class RowDto
     {
+        public long Id { get; set; }
         public long InvoiceId { get; set; }
         public string ItemName { get; set; }
         public int Quantity { get; set; }

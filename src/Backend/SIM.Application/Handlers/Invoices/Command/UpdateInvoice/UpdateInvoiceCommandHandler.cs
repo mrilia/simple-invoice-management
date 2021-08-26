@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using SIM.Application.Interfaces;
 using SIM.Application.Messages;
 using SIM.Application.Result;
-using SIM.Domain.Models.Item;
+using SIM.Domain.Models.Invoice;
 
 namespace SIM.Application.Handlers.Invoices.Command.Update
 {
@@ -24,22 +24,22 @@ namespace SIM.Application.Handlers.Invoices.Command.Update
 
         public async Task<Result.Result> Handle(UpdateInvoiceCommand request, CancellationToken cancellationToken)
         {
-            var item = await GetItemAsync(request, cancellationToken);
+            var invoice = await GetInvoiceAsync(request, cancellationToken);
 
-            if (item is null)
+            if (invoice is null)
                 return Result.Result.Failed(new BadRequestObjectResult
-                (new ApiMessage(ResponseMessage.ItemNotFound)));
+                (new ApiMessage(ResponseMessage.InvoiceNotFound)));
 
-            _mapper.Map(request, item);
+            _mapper.Map(request, invoice);
 
             await _context.SaveAsync(cancellationToken);
 
             return Result.Result.SuccessFul();
         }
 
-        private async Task<Item> GetItemAsync(UpdateInvoiceCommand request, CancellationToken cancellationToken)
+        private async Task<Invoice> GetInvoiceAsync(UpdateInvoiceCommand request, CancellationToken cancellationToken)
         {
-            return await _context.Items.SingleOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
+            return await _context.Invoices.SingleOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
         }
         
     }

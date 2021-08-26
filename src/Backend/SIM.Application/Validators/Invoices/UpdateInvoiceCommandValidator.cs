@@ -24,8 +24,7 @@ namespace SIM.Application.Common.Validator.Invoices
 
             RuleFor(dto => dto.Number)
                 .NotEmpty().WithMessage(ResponseMessage.NumberIsRequired)
-                .NotNull().WithMessage(ResponseMessage.NumberIsRequired)
-                .MustAsync(UniqueInvoiceNumber).WithMessage(ResponseMessage.InvoiceNumberNotUnique);
+                .NotNull().WithMessage(ResponseMessage.NumberIsRequired);
 
             RuleFor(dto => dto.BuyerName)
                 .NotEmpty().WithMessage(ResponseMessage.BuyerNameIsRequired)
@@ -33,13 +32,14 @@ namespace SIM.Application.Common.Validator.Invoices
 
             RuleFor(dto => dto)
                 .Must(ValidPrices).WithMessage(ResponseMessage.PricesNotValid)
-                .Must(ValidRowsPrices).WithMessage(ResponseMessage.PricesNotValid);
+                .Must(ValidRowsPrices).WithMessage(ResponseMessage.PricesNotValid)
+                .MustAsync(UniqueInvoiceNumber).WithMessage(ResponseMessage.InvoiceNumberNotUnique);
 
         }
 
-        private async Task<bool> UniqueInvoiceNumber(long numberToCheck, CancellationToken cancellationToken)
+        private async Task<bool> UniqueInvoiceNumber(UpdateInvoiceCommand invoiceToCheck, CancellationToken cancellationToken)
         {
-            if (await _context.Invoices.AnyAsync(x => x.Number == numberToCheck, cancellationToken))
+            if (await _context.Invoices.AnyAsync(x => x.Number == invoiceToCheck.Number && x.Id != invoiceToCheck.Id, cancellationToken))
                 return false;
 
             return true;
