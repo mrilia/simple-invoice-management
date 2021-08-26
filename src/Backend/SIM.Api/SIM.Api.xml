@@ -16,13 +16,45 @@
         </member>
         <member name="M:SIM.Api.Controllers.Item.ItemController.Get(System.Int64,System.Threading.CancellationToken)">
             <summary>
-            List Of Items
+            Item Info
             </summary>
             <param name="id"></param>
             <param name="cancellationToken"></param>
-            <returns> Item list</returns>
+            <returns> Item info</returns>
             <response code="200">if every thing is ok </response>
             <response code="404">If item not found</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:SIM.Api.Controllers.Item.ItemController.GetList(System.String,System.Threading.CancellationToken)">
+            <summary>
+            List Of Items 
+            </summary>
+            <param name="query"></param>
+            <param name="cancellationToken"></param>
+            <returns> Items list</returns>
+            <response code="200">if every thing is ok </response>
+            <response code="400">If page or limit is overFlow</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:SIM.Api.Controllers.Item.ItemController.Delete(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Delete Item
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <response code="204">if delete successfully </response>
+            <response code="404">If item not found</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:SIM.Api.Controllers.Item.ItemController.Update(SIM.Application.Handlers.Items.Command.UpdateItem.UpdateItemCommand,System.Threading.CancellationToken)">
+            <summary>
+            Update  Item
+            </summary>
+            <param name="updateItemCommand"></param>
+            <param name="cancellationToken"></param>
+            <response code="204">if update item successfully </response>
+            <response code="400">If Validation Failed</response>
+            <response code="404">If Validation Failed</response>
             <response code="500">If an unexpected error happen</response>
         </member>
         <member name="T:SIM.Api.Middleware.OnExceptionMiddleware">

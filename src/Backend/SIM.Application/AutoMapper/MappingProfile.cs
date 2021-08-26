@@ -2,6 +2,7 @@
 using System.Linq;
 using AutoMapper;
 using SIM.Application.Handlers.Items.Command.AddNewItem;
+using SIM.Application.Handlers.Items.Command.UpdateItem;
 using SIM.Application.Handlers.Items.Dto;
 using SIM.Domain.Models;
 using SIM.Domain.Models.Invoice;
@@ -15,6 +16,8 @@ namespace SIM.Application.AutoMapper
         {           
             CreateMap<Item, ItemDto>();
             CreateMap<AddNewItemCommand, Item>();
+            CreateMap<UpdateItemCommand, Item>();
+
         }
     }
 }
