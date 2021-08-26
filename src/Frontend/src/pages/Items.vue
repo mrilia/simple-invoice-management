@@ -5,7 +5,35 @@
 </template>
 
 <script>
+import { api } from "boot/axios";
+import { useQuasar } from "quasar";
+
 export default {
-  // name: 'PageName',
-}
+  data() {
+    return {
+      options: [],
+    };
+  },
+  setup() {
+    const $q = useQuasar();
+    const data = {};
+
+    api
+      .get("/Item/list")
+      .then((response) => {
+        data.value = response.data;
+      })
+      .catch((c) => {
+        console.log(c)
+        $q.notify({
+          color: "negative",
+          position: "top",
+          message: "واکشی اطلاعات با خطا مواجه شد",
+          icon: "report_problem",
+        });
+      });
+
+    return data;
+  },
+};
 </script>
