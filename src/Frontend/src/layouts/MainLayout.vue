@@ -52,16 +52,22 @@ import EssentialLink from 'components/EssentialLink.vue'
 
 const linksList = [
   {
+    title: 'خانه',
+    caption: 'از طریق این گزینه به صفحه اصلی برمیگردید.',
+    icon: 'home',
+    link: '/'
+  },
+  {
     title: 'فاکتورها',
     caption: 'از این گزینه جهت مدیریت فاکتورها استفاده نمایید.',
     icon: 'receipt',
-    link: 'invoices'
+    link: 'Invoices'
   },
   {
     title: 'کالاها',
     caption: 'جهت مدیریت کالاها از این گزینه استفاده نمایید.',
     icon: 'inventory_2',
-    link: 'items'
+    link: 'Items'
   }
 ];
 
