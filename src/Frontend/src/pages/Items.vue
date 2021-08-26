@@ -134,6 +134,7 @@ export default {
         .put("/Item", itemToUpdate)
         .then((response) => {
           this.$q.notify({
+            progress: true,
             color: "positive",
             position: "top",
             message: "به روزرسانی کالا با موفقیت انجام شد",
@@ -145,20 +146,24 @@ export default {
             .then((response) => {
               this.items = response.data;
             })
-            .catch(() => {
+            .catch((error) => {
               this.$q.notify({
+                progress: true,
                 color: "negative",
                 position: "top",
                 message: "به روزرسانی لیست کالاها با خطا مواجه شد",
+                caption: error.response.data.message,
                 icon: "report_problem",
               });
             });
         })
-        .catch(() => {
-          $q.notify({
+        .catch((error) => {
+          this.$q.notify({
+            progress: true,
             color: "negative",
             position: "top",
             message: "به روزرسانی اطلاعات کالا با خطا مواجه شد",
+            caption: error.response.data.message,
             icon: "report_problem",
           });
         });
@@ -168,6 +173,7 @@ export default {
         .delete("/Item/" + id)
         .then((response) => {
           this.$q.notify({
+            progress: true,
             color: "positive",
             position: "top",
             message: "حذف کالا با موفقیت انجام شد",
@@ -179,20 +185,24 @@ export default {
             .then((response) => {
               this.items = response.data;
             })
-            .catch(() => {
+            .catch((error) => {
               this.$q.notify({
+                progress: true,
                 color: "negative",
                 position: "top",
                 message: "به روزرسانی لیست کالاها با خطا مواجه شد",
+                caption: error.response.data.message,
                 icon: "report_problem",
               });
             });
         })
-        .catch(() => {
-          $q.notify({
+        .catch((error) => {
+          this.$q.notify({
+            progress: true,
             color: "negative",
             position: "top",
             message: "حذف اطلاعات کالا با خطا مواجه شد",
+            caption: error.response.data.message,
             icon: "report_problem",
           });
         });
@@ -202,6 +212,7 @@ export default {
         .post("/Item", { name: this.itemNameToAdd, fee: this.itemFeeToAdd })
         .then((response) => {
           this.$q.notify({
+            progress: true,
             color: "positive",
             position: "top",
             message: "ثبت کالا با موفقیت انجام شد",
@@ -215,18 +226,22 @@ export default {
             })
             .catch(() => {
               this.$q.notify({
+                progress: true,
                 color: "negative",
                 position: "top",
-                message: "به روزرسانی لیست کالاها با خطا مواجه شد",
+                message: "به روزرسانی لیست کالاها با خطا مواجه شد. ",
+                caption: error.response.data.message,
                 icon: "report_problem",
               });
             });
         })
-        .catch(() => {
-          $q.notify({
+        .catch((error) => {
+          this.$q.notify({
+            progress: true,
             color: "negative",
             position: "top",
-            message: "ثبت کالا با خطا مواجه شد",
+            message: "ثبت کالا با خطا مواجه شد. ",
+            caption: error.response.data.message,
             icon: "report_problem",
           });
         });
@@ -238,18 +253,18 @@ export default {
     },
   },
   created() {
-    const $q = useQuasar();
-
     api
       .get("/Item/list")
       .then((response) => {
         this.items = response.data;
       })
-      .catch(() => {
-        $q.notify({
+      .catch((error) => {
+        this.$q.notify({
+          progress: true,
           color: "negative",
           position: "top",
-          message: "واکشی اطلاعات با خطا مواجه شد",
+          message: "واکشی اطلاعات با خطا مواجه شد. ",
+          caption: error.response.data.message,
           icon: "report_problem",
         });
       });
