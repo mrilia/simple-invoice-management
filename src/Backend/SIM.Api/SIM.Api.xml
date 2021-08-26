@@ -4,6 +4,59 @@
         <name>SIM.Api</name>
     </assembly>
     <members>
+        <member name="M:SIM.Api.Controllers.Invoice.InvoiceController.AddNew(SIM.Application.Handlers.Invoices.Command.AddNew.AddNewInvoiceCommand,System.Threading.CancellationToken)">
+            <summary>
+            Add new invoice
+            </summary>
+            <param name="addNewInvoiceCommand"></param>
+            <param name="cancellationToken"></param>
+            <response code="201">if create invoice successfully </response>
+            <response code="400">If Validation Failed</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:SIM.Api.Controllers.Invoice.InvoiceController.Get(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Invoice Info
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <returns> Invoice info</returns>
+            <response code="200">if every thing is ok </response>
+            <response code="404">If invoice not found</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:SIM.Api.Controllers.Invoice.InvoiceController.GetList(System.String,System.Threading.CancellationToken)">
+            <summary>
+            List Of Invoices 
+            </summary>
+            <param name="query"></param>
+            <param name="cancellationToken"></param>
+            <returns> Invoices list</returns>
+            <response code="200">if every thing is ok </response>
+            <response code="400">If page or limit is overFlow</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:SIM.Api.Controllers.Invoice.InvoiceController.Delete(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Delete Invoice
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <response code="204">if delete successfully </response>
+            <response code="404">If invoice not found</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:SIM.Api.Controllers.Invoice.InvoiceController.Update(SIM.Application.Handlers.Invoices.Command.Update.UpdateInvoiceCommand,System.Threading.CancellationToken)">
+            <summary>
+            Update  Invoice
+            </summary>
+            <param name="updateInvoiceCommand"></param>
+            <param name="cancellationToken"></param>
+            <response code="204">if update invoice successfully </response>
+            <response code="400">If Validation Failed</response>
+            <response code="404">If Validation Failed</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
         <member name="M:SIM.Api.Controllers.Item.ItemController.AddNew(SIM.Application.Handlers.Items.Command.AddNew.AddNewItemCommand,System.Threading.CancellationToken)">
             <summary>
             Add new item

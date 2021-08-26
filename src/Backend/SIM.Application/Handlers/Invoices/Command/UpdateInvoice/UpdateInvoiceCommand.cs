@@ -15,10 +15,10 @@ namespace SIM.Application.Handlers.Invoices.Command.Update
         public long TotalDiscount { get; set; }
         public long PayablePrice { get; set; }
 
-        public List<RowDto> Rows { get; set; }
+        public List<RowDtoToUpdate> Rows { get; set; }
     }
 
-    public class RowDto
+    public class RowDtoToUpdate
     {
         public long Id { get; set; }
         public long InvoiceId { get; set; }

@@ -10,20 +10,24 @@ using SIM.Application.Handlers.Invoices.Dto;
 using SIM.Domain.Models;
 using SIM.Domain.Models.Invoice;
 using SIM.Domain.Models.Item;
+using System.Collections.Generic;
 
 namespace SIM.Application.AutoMapper
 {
     public class MappingProfile : Profile
     {
         public MappingProfile()
-        {           
+        {
             CreateMap<Item, ItemDto>();
             CreateMap<AddNewItemCommand, Item>();
             CreateMap<UpdateItemCommand, Item>();
 
             CreateMap<Invoice, InvoiceDto>();
+            CreateMap<InvoiceRow, RowDto>();
             CreateMap<AddNewInvoiceCommand, Invoice>();
             CreateMap<UpdateInvoiceCommand, Invoice>();
+
+
         }
     }
 }

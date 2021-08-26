@@ -25,7 +25,6 @@ namespace SIM.Application.Handlers.Invoices.Command.AddNew
     }
     public class RowDto
     {
-        public long InvoiceId { get; set; }
         public string ItemName { get; set; }
         public int Quantity { get; set; }
         public long Fee { get; set; }
