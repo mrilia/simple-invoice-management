@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
-using SIM.Application.Handlers.Items.Command.UpdateItem;
+using SIM.Application.Handlers.Items.Command.Update;
 using SIM.Application.Interfaces;
 using SIM.Application.Messages;
 
@@ -19,7 +19,8 @@ namespace SIM.Application.Common.Validator.Items
 
             RuleFor(dto => dto.Id)
                 .NotEmpty().WithMessage(ResponseMessage.IdIsRequired)
-                .NotNull().WithMessage(ResponseMessage.IdIsRequired);
+                .NotNull().WithMessage(ResponseMessage.IdIsRequired)
+                .MustAsync(Exists).WithMessage(ResponseMessage.ItemIdNotExists);
 
             RuleFor(dto => dto.Name)
                 .NotEmpty().WithMessage(ResponseMessage.NameIsRequired)
@@ -31,5 +32,12 @@ namespace SIM.Application.Common.Validator.Items
 
         }
 
+        private async Task<bool> Exists(long idToCheck, CancellationToken cancellationToken)
+        {
+            if (!await _context.Items.AnyAsync(x => x.Id == idToCheck, cancellationToken))
+                return false;
+
+            return true;
+        }
     }
 }

@@ -7,7 +7,7 @@ using SIM.Application.Interfaces;
 using SIM.Application.Result;
 using SIM.Domain.Models.Item;
 
-namespace SIM.Application.Handlers.Items.Command.AddNewItem
+namespace SIM.Application.Handlers.Items.Command.AddNew
 {
     public class AddNewItemCommand : IRequest<Result<ItemDto>>
     {

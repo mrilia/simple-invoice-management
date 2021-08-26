@@ -4,7 +4,7 @@
         <name>SIM.Api</name>
     </assembly>
     <members>
-        <member name="M:SIM.Api.Controllers.Item.ItemController.AddNew(SIM.Application.Handlers.Items.Command.AddNewItem.AddNewItemCommand,System.Threading.CancellationToken)">
+        <member name="M:SIM.Api.Controllers.Item.ItemController.AddNew(SIM.Application.Handlers.Items.Command.AddNew.AddNewItemCommand,System.Threading.CancellationToken)">
             <summary>
             Add new item
             </summary>
@@ -46,7 +46,7 @@
             <response code="404">If item not found</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:SIM.Api.Controllers.Item.ItemController.Update(SIM.Application.Handlers.Items.Command.UpdateItem.UpdateItemCommand,System.Threading.CancellationToken)">
+        <member name="M:SIM.Api.Controllers.Item.ItemController.Update(SIM.Application.Handlers.Items.Command.Update.UpdateItemCommand,System.Threading.CancellationToken)">
             <summary>
             Update  Item
             </summary>

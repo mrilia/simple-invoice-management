@@ -7,7 +7,7 @@ using SIM.Application.Interfaces;
 using SIM.Application.Result;
 using SIM.Domain.Models.Item;
 
-namespace SIM.Application.Handlers.Items.Command.AddNewItem
+namespace SIM.Application.Handlers.Items.Command.AddNew
 {
     public class AddNewItemCommandHandler : IRequestHandler<AddNewItemCommand, Result<ItemDto>>
     {
@@ -22,12 +22,12 @@ namespace SIM.Application.Handlers.Items.Command.AddNewItem
 
         public async Task<Result<ItemDto>> Handle(AddNewItemCommand request, CancellationToken cancellationToken)
         {
-            var item = _mapper.Map<Item>(request);
+            var itemToAdd = _mapper.Map<Item>(request);
 
-            await _context.Items.AddAsync(item, cancellationToken);
+            await _context.Items.AddAsync(itemToAdd, cancellationToken);
             await _context.SaveAsync(cancellationToken);
 
-            return Result<ItemDto>.SuccessFul(_mapper.Map<ItemDto>(item));
+            return Result<ItemDto>.SuccessFul(_mapper.Map<ItemDto>(itemToAdd));
         }
     }
 }

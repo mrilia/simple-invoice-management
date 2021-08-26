@@ -9,7 +9,7 @@ using SIM.Application.Messages;
 using SIM.Application.Result;
 using SIM.Domain.Models.Item;
 
-namespace SIM.Application.Handlers.Items.Command.UpdateItem
+namespace SIM.Application.Handlers.Items.Command.Update
 {
     public class UpdateItemCommandHandler : IRequestHandler<UpdateItemCommand, Result.Result>
     {
@@ -24,13 +24,13 @@ namespace SIM.Application.Handlers.Items.Command.UpdateItem
 
         public async Task<Result.Result> Handle(UpdateItemCommand request, CancellationToken cancellationToken)
         {
-            var item = await GetItemAsync(request, cancellationToken);
+            var itemToUpdate = await GetItemAsync(request, cancellationToken);
 
-            if (item is null)
+            if (itemToUpdate is null)
                 return Result.Result.Failed(new BadRequestObjectResult
                 (new ApiMessage(ResponseMessage.ItemNotFound)));
 
-            _mapper.Map(request, item);
+            _mapper.Map(request, itemToUpdate);
 
             await _context.SaveAsync(cancellationToken);
 

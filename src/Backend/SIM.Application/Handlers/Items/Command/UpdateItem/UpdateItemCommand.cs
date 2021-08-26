@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using SIM.Application.Result;
 
-namespace SIM.Application.Handlers.Items.Command.UpdateItem
+namespace SIM.Application.Handlers.Items.Command.Update
 {
     public class UpdateItemCommand : IRequest<Result.Result>
     {
