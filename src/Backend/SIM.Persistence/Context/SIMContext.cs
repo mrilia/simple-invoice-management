@@ -27,7 +27,7 @@ namespace SIM.Persistence.Context
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(
-                    @"Server=.;Initial Catalog =SIMContext;MultipleActiveResultSets=true;User ID=sa;Password=q1!w2@e3#r4$");
+                    @"Server=localhost;Initial Catalog =SIMContext;MultipleActiveResultSets=true;User ID=sa;Password=q1!w2@e3#r4$");
             }
         }
 
