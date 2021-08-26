@@ -1,6 +1,58 @@
 <template>
   <q-page padding>
     <h4 class="text-weight-bold">مدیریت کالاها</h4>
+
+    <div class="q-pa-md">
+      <q-table
+        :rows="items"
+        :columns="columns"
+        title="لیست اقلام ثبت شده"
+        :rows-per-page-options="[]"
+        row-key="id"
+      >
+        <template v-slot:body="props">
+          <q-tr :props="props">
+            <q-td key="name" :props="props">
+              {{ props.row.name }}
+              <q-popup-edit v-model="props.row.name" buttons v-slot="scope">
+                <q-input
+                  v-model="scope.value"
+                  dense
+                  autofocus
+                  counter
+                  @keyup.enter="scope.set"
+                />
+              </q-popup-edit>
+            </q-td>
+            <q-td key="fee" :props="props">
+              {{ props.row.fee }}
+              <q-popup-edit
+                v-model.number="props.row.fee"
+                buttons
+                v-slot="scope"
+              >
+                <q-input
+                  type="number"
+                  v-model.number="scope.value"
+                  dense
+                  autofocus
+                  @keyup.enter="scope.set"
+                />
+              </q-popup-edit>
+            </q-td>
+            <q-td>
+              <q-btn
+                dense
+                autofocus
+                color="negative"
+                icon="delete"
+                @click="deleteItem(props.row.id)"
+              />
+            </q-td>
+          </q-tr>
+        </template>
+      </q-table>
+    </div>
   </q-page>
 </template>
 
@@ -11,20 +63,61 @@ import { useQuasar } from "quasar";
 export default {
   data() {
     return {
-      options: [],
+      items: [],
+      columns: [
+        { name: "name", align: "left", label: "نام کالا", field: "Name" },
+        { name: "fee", align: "left", label: "قیمت واحد", field: "Fee" },
+        { name: "delete", align: "left", label: "حذف" },
+      ],
     };
   },
-  setup() {
+  methods: {
+    deleteItem(id) {
+      api
+        .delete("/Item/" + id)
+        .then((response) => {
+          this.$q.notify({
+            color: "positive",
+            position: "top",
+            message: "حذف کالا با موفقیت انجام شد",
+            icon: "check_circle",
+          });
+
+          api
+            .get("/Item/list")
+            .then((response) => {
+              this.items = response.data;
+            })
+            .catch((c) => {
+              console.log(c);
+              this.$q.notify({
+                color: "negative",
+                position: "top",
+                message: "به روزرسانی لیست کالاها با خطا مواجه شد",
+                icon: "report_problem",
+              });
+            });
+        })
+        .catch((c) => {
+          $q.notify({
+            color: "negative",
+            position: "top",
+            message: "واکشی اطلاعات با خطا مواجه شد",
+            icon: "report_problem",
+          });
+        });
+    },
+  },
+  created() {
     const $q = useQuasar();
-    const data = {};
 
     api
       .get("/Item/list")
       .then((response) => {
-        data.value = response.data;
+        this.items = response.data;
       })
       .catch((c) => {
-        console.log(c)
+        console.log(c);
         $q.notify({
           color: "negative",
           position: "top",
@@ -32,8 +125,6 @@ export default {
           icon: "report_problem",
         });
       });
-
-    return data;
   },
 };
 </script>
