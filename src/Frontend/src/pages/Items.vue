@@ -1,8 +1,55 @@
 <template>
   <q-page padding>
-    <h4 class="text-weight-bold">مدیریت کالاها</h4>
+    <div class="row">
+      <h4 class="text-weight-bold">مدیریت کالاها</h4>
+    </div>
 
-    <div class="q-pa-md">
+    <div class="row">
+      <q-form @submit="addNewItem" @reset="clearForm">
+        <div class="col">
+          <q-input
+            filled
+            v-model="itemNameToAdd"
+            label="نام کالا *"
+            lazy-rules
+            :rules="[
+              (val) =>
+                (val && val.length > 0) || 'نوشتن مقدار این فیلد ضروری است',
+            ]"
+          />
+        </div>
+
+        <div class="col">
+          <q-input
+            class="col"
+            filled
+            type="number"
+            v-model="itemFeeToAdd"
+            label="قیمت واحد *"
+            lazy-rules
+            :rules="[
+              (val) =>
+                (val !== null && val !== '') ||
+                'نوشتن مقدار این فیلد ضروری است',
+              (val) => val > 0 || 'مقدار فیلد نامعتبر است',
+            ]"
+          />
+        </div>
+
+        <div class="col">
+          <q-btn label="ثبت" type="submit" color="primary" />
+          <q-btn
+            label="پاک کن"
+            type="reset"
+            color="primary"
+            flat
+            class="q-ml-sm"
+          />
+        </div>
+      </q-form>
+    </div>
+
+    <div class="inline q-pa-md">
       <q-table
         :rows="items"
         :columns="columns"
@@ -14,7 +61,12 @@
           <q-tr :props="props">
             <q-td key="name" :props="props">
               {{ props.row.name }}
-              <q-popup-edit v-model="props.row.name" buttons v-slot="scope">
+              <q-popup-edit
+                v-model="props.row.name"
+                buttons
+                v-slot="scope"
+                @before-hide="updateItem(props.row.id)"
+              >
                 <q-input
                   v-model="scope.value"
                   dense
@@ -30,6 +82,7 @@
                 v-model.number="props.row.fee"
                 buttons
                 v-slot="scope"
+                @before-hide="updateItem(props.row.id)"
               >
                 <q-input
                   type="number"
@@ -63,6 +116,8 @@ import { useQuasar } from "quasar";
 export default {
   data() {
     return {
+      itemNameToAdd: "",
+      itemFeeToAdd: null,
       items: [],
       columns: [
         { name: "name", align: "left", label: "نام کالا", field: "Name" },
@@ -72,6 +127,42 @@ export default {
     };
   },
   methods: {
+    updateItem(id) {
+      const itemToUpdate = this.items.find((item) => item.id == id);
+
+      api
+        .put("/Item", itemToUpdate)
+        .then((response) => {
+          this.$q.notify({
+            color: "positive",
+            position: "top",
+            message: "به روزرسانی کالا با موفقیت انجام شد",
+            icon: "check_circle",
+          });
+
+          api
+            .get("/Item/list")
+            .then((response) => {
+              this.items = response.data;
+            })
+            .catch(() => {
+              this.$q.notify({
+                color: "negative",
+                position: "top",
+                message: "به روزرسانی لیست کالاها با خطا مواجه شد",
+                icon: "report_problem",
+              });
+            });
+        })
+        .catch(() => {
+          $q.notify({
+            color: "negative",
+            position: "top",
+            message: "به روزرسانی اطلاعات کالا با خطا مواجه شد",
+            icon: "report_problem",
+          });
+        });
+    },
     deleteItem(id) {
       api
         .delete("/Item/" + id)
@@ -88,8 +179,7 @@ export default {
             .then((response) => {
               this.items = response.data;
             })
-            .catch((c) => {
-              console.log(c);
+            .catch(() => {
               this.$q.notify({
                 color: "negative",
                 position: "top",
@@ -98,14 +188,53 @@ export default {
               });
             });
         })
-        .catch((c) => {
+        .catch(() => {
           $q.notify({
             color: "negative",
             position: "top",
-            message: "واکشی اطلاعات با خطا مواجه شد",
+            message: "حذف اطلاعات کالا با خطا مواجه شد",
             icon: "report_problem",
           });
         });
+    },
+    addNewItem() {
+      api
+        .post("/Item", { name: this.itemNameToAdd, fee: this.itemFeeToAdd })
+        .then((response) => {
+          this.$q.notify({
+            color: "positive",
+            position: "top",
+            message: "ثبت کالا با موفقیت انجام شد",
+            icon: "check_circle",
+          });
+
+          api
+            .get("/Item/list")
+            .then((response) => {
+              this.items = response.data;
+            })
+            .catch(() => {
+              this.$q.notify({
+                color: "negative",
+                position: "top",
+                message: "به روزرسانی لیست کالاها با خطا مواجه شد",
+                icon: "report_problem",
+              });
+            });
+        })
+        .catch(() => {
+          $q.notify({
+            color: "negative",
+            position: "top",
+            message: "ثبت کالا با خطا مواجه شد",
+            icon: "report_problem",
+          });
+        });
+    },
+
+    clearForm() {
+      this.itemNameToAdd = null;
+      this.itemFeeToAdd = null;
     },
   },
   created() {
@@ -116,8 +245,7 @@ export default {
       .then((response) => {
         this.items = response.data;
       })
-      .catch((c) => {
-        console.log(c);
+      .catch(() => {
         $q.notify({
           color: "negative",
           position: "top",
