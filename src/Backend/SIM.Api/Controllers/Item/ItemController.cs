@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SIM.Application.Handlers.Items.Command.AddNewItem;
+using SIM.Application.Handlers.Items.Command.DeleteItem;
+using SIM.Application.Handlers.Items.Command.UpdateItem;
 using SIM.Application.Handlers.Items.Queries;
 using SIM.Application.Handlers.Items.Dto;
 using SIM.Application.Messages;
@@ -45,11 +47,11 @@ namespace SIM.Api.Controllers.Item
 
 
         /// <summary>
-        /// List Of Items
+        /// Item Info
         /// </summary>
         /// <param name="id"></param>
         /// <param name="cancellationToken"></param>
-        /// <returns> Item list</returns>
+        /// <returns> Item info</returns>
         /// <response code="200">if every thing is ok </response>
         /// <response code="404">If item not found</response>
         /// <response code="500">If an unexpected error happen</response>
@@ -64,5 +66,74 @@ namespace SIM.Api.Controllers.Item
             return result.ApiResult;
         }
 
+
+
+        /// <summary>
+        /// List Of Items 
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns> Items list</returns>
+        /// <response code="200">if every thing is ok </response>
+        /// <response code="400">If page or limit is overFlow</response>
+        /// <response code="500">If an unexpected error happen</response>
+        [ProducesResponseType(typeof(List<ItemDto>), 200)]
+        [ProducesResponseType(typeof(ApiMessage), 400)]
+        [ProducesResponseType(typeof(ApiMessage), 500)]
+        [HttpGet("list")]
+        public async Task<IActionResult> GetList(string query, CancellationToken cancellationToken)
+            => Ok(await _mediator.Send(new GetItemsListQuery { Query = query }, cancellationToken));
+
+
+
+
+        /// <summary>
+        /// Delete Item
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="cancellationToken"></param>
+        /// <response code="204">if delete successfully </response>
+        /// <response code="404">If item not found</response>
+        /// <response code="500">If an unexpected error happen</response>
+        [ProducesResponseType(204)]
+        [ProducesResponseType(typeof(ApiMessage), 404)]
+        [ProducesResponseType(typeof(ApiMessage), 500)]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(long id, CancellationToken cancellationToken)
+        {
+            var result = await _mediator.Send(new DeleteItemCommand { Id = id }, cancellationToken);
+
+            if (result.Success == false)
+                return result.ApiResult;
+
+            return NoContent();
+        }
+
+
+
+        /// <summary>
+        /// Update  Item
+        /// </summary>
+        /// <param name="updateItemCommand"></param>
+        /// <param name="cancellationToken"></param>
+        /// <response code="204">if update item successfully </response>
+        /// <response code="400">If Validation Failed</response>
+        /// <response code="404">If Validation Failed</response>
+        /// <response code="500">If an unexpected error happen</response>
+        [ProducesResponseType(204)]
+        [ProducesResponseType(typeof(ApiMessage), 400)]
+        [ProducesResponseType(typeof(ApiMessage), 404)]
+        [ProducesResponseType(typeof(ApiMessage), 500)]
+        [HttpPut]
+        public async Task<IActionResult> Update(UpdateItemCommand updateItemCommand,
+            CancellationToken cancellationToken)
+        {
+            var result = await _mediator.Send(updateItemCommand, cancellationToken);
+
+            if (result.Success == false)
+                return result.ApiResult;
+
+            return NoContent();
+        }
     }
 }
