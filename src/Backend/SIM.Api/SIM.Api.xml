@@ -18,11 +18,20 @@
             <summary>
             Invoice Info
             </summary>
-            <param name="id"></param>
+            <param name="number"></param>
             <param name="cancellationToken"></param>
             <returns> Invoice info</returns>
             <response code="200">if every thing is ok </response>
             <response code="404">If invoice not found</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:SIM.Api.Controllers.Invoice.InvoiceController.GetNewNumber(System.Threading.CancellationToken)">
+            <summary>
+            Invoice Number
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns> New Invoice Number</returns>
+            <response code="200">if every thing is ok </response>
             <response code="500">If an unexpected error happen</response>
         </member>
         <member name="M:SIM.Api.Controllers.Invoice.InvoiceController.GetList(System.String,System.Threading.CancellationToken)">

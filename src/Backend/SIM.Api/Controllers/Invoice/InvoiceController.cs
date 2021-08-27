@@ -49,7 +49,7 @@ namespace SIM.Api.Controllers.Invoice
         /// <summary>
         /// Invoice Info
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="number"></param>
         /// <param name="cancellationToken"></param>
         /// <returns> Invoice info</returns>
         /// <response code="200">if every thing is ok </response>
@@ -62,6 +62,27 @@ namespace SIM.Api.Controllers.Invoice
         public async Task<IActionResult> Get(long number, CancellationToken cancellationToken)
         {
             var result = await _mediator.Send(new GetInvoiceQuery { Number = number }, cancellationToken);
+
+            return result.ApiResult;
+        }
+
+
+
+
+        /// <summary>
+        /// Invoice Number
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns> New Invoice Number</returns>
+        /// <response code="200">if every thing is ok </response>
+        /// <response code="500">If an unexpected error happen</response>
+        [ProducesResponseType(typeof(InvoiceDto), 200)]
+        [ProducesResponseType(typeof(ApiMessage), 404)]
+        [ProducesResponseType(typeof(ApiMessage), 500)]
+        [HttpGet("NewInvoiceNumber", Name = "GetNewInvoiceNumber")]
+        public async Task<IActionResult> GetNewNumber(CancellationToken cancellationToken)
+        {
+            var result = await _mediator.Send(new GetNewInvoiceNumberQuery { }, cancellationToken);
 
             return result.ApiResult;
         }

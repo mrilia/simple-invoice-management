@@ -28,6 +28,7 @@ namespace SIM.Application.AutoMapper
             CreateMap<InvoiceRow, InvoiceRowDto>();
             CreateMap<RowDto, InvoiceRow>();
             CreateMap<RowDtoToUpdate, InvoiceRow>();
+            CreateMap<NumberDto, InvoiceNumberDto>();
         }
     }
 }
