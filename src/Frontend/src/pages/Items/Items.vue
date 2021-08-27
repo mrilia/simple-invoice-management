@@ -5,46 +5,46 @@
     </div>
     <q-form @submit="addNewItem" @reset="clearForm" class="q-pa-md">
       <div class="row">
-          <div class="col q-pa-md">
-            <q-input
-              filled
-              v-model="itemNameToAdd"
-              label="نام کالا *"
-              lazy-rules
-              :rules="[
-                (val) =>
-                  (val && val.length > 0) || 'نوشتن مقدار این فیلد ضروری است',
-              ]"
-            />
-          </div>
-          <div class="col q-pa-md">
-            <q-input
-              class="col"
-              filled
-              type="number"
-              v-model="itemFeeToAdd"
-              label="قیمت واحد *"
-              lazy-rules
-              :rules="[
-                (val) =>
-                  (val !== null && val !== '') ||
-                  'نوشتن مقدار این فیلد ضروری است',
-                (val) => val > 0 || 'مقدار فیلد نامعتبر است',
-              ]"
-            />
-          </div>
-          <div class="col q-pa-md">
-            <q-btn label="ثبت" type="submit" color="primary" />
-            <q-btn
-              label="پاک کن"
-              type="reset"
-              color="primary"
-              flat
-              class="q-ml-sm"
-            />
-          </div>
+        <div class="col q-pa-md">
+          <q-input
+            filled
+            v-model="itemNameToAdd"
+            label="نام کالا *"
+            lazy-rules
+            :rules="[
+              (val) =>
+                (val && val.length > 0) || 'نوشتن مقدار این فیلد ضروری است',
+            ]"
+          />
+        </div>
+        <div class="col q-pa-md">
+          <q-input
+            class="col"
+            filled
+            type="number"
+            v-model="itemFeeToAdd"
+            label="قیمت واحد *"
+            lazy-rules
+            :rules="[
+              (val) =>
+                (val !== null && val !== '') ||
+                'نوشتن مقدار این فیلد ضروری است',
+              (val) => val > 0 || 'مقدار فیلد نامعتبر است',
+            ]"
+          />
+        </div>
+        <div class="col q-pa-md">
+          <q-btn label="ثبت" type="submit" color="primary" />
+          <q-btn
+            label="پاک کن"
+            type="reset"
+            color="primary"
+            flat
+            class="q-ml-sm"
+          />
+        </div>
       </div>
-        </q-form>
+    </q-form>
 
     <div class="inline q-pa-md">
       <q-table

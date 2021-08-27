@@ -5,8 +5,10 @@ const routes = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', component: () => import('pages/Index.vue') },
-      { path: '/Items', component: () => import('pages/Items.vue') },
-      { path: '/Invoices', component: () => import('pages/Invoices.vue') },
+      { path: '/Items', component: () => import('src/pages/Items/Items.vue') },
+      { path: '/Invoices', component: () => import('src/pages/Invoices/List.vue') },
+      { path: '/Invoices/AddNew', component: () => import('src/pages/Invoices/AddNew.vue') },
+      { path: '/Invoices/Update/:id', component: () => import('src/pages/Invoices/Update.vue') },
     ]
   },
   

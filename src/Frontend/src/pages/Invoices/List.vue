@@ -4,6 +4,18 @@
       <h4 class="text-weight-bold">مدیریت فاکتورها</h4>
     </div>
 
+    <div class="q-pa-md">
+      <div class="row">
+        <div class="col q-pa-md">
+          <q-btn
+            label="ثبت فاکتور جدید"
+            color="primary"
+            @click="gotoAddNewInvoicePage"
+          />
+        </div>
+      </div>
+    </div>
+
     <div class="inline q-pa-md">
       <q-table
         :rows="invoices"
@@ -36,15 +48,22 @@
               {{ props.row.description }}
             </q-td>
             <q-td>
-              <q-btn-group outline>
+              <q-btn-group push>
                 <q-btn
-                  outline
+                  push
                   color="negative"
                   icon-right="delete"
                   @click="deleteInvoice(props.row.id)"
                 />
                 <q-btn
-                  outline
+                  push
+                  color="warning"
+                  text-color="orange"
+                  icon-right="edit"
+                  @click="gotoUpdateInvoicePage(props.row.number)"
+                />
+                <q-btn
+                  push
                   color="primary"
                   icon-right="print"
                   @click="printInvoice(props.row.id)"
@@ -236,47 +255,6 @@ export default {
     };
   },
   methods: {
-    updateInvoice(id) {
-      const invoiceToUpdate = this.invoices.find((invoice) => invoice.id == id);
-
-      api
-        .put("/Invoice", invoiceToUpdate)
-        .then((response) => {
-          this.$q.notify({
-            progress: true,
-            color: "positive",
-            position: "top",
-            message: "به روزرسانی فاکتور با موفقیت انجام شد",
-            icon: "check_circle",
-          });
-
-          api
-            .get("/Invoice/list")
-            .then((response) => {
-              this.invoices = response.data;
-            })
-            .catch((error) => {
-              this.$q.notify({
-                progress: true,
-                color: "negative",
-                position: "top",
-                message: "به روزرسانی لیست فاکتورها با خطا مواجه شد",
-                caption: error.response.data.message,
-                icon: "report_problem",
-              });
-            });
-        })
-        .catch((error) => {
-          this.$q.notify({
-            progress: true,
-            color: "negative",
-            position: "top",
-            message: "به روزرسانی اطلاعات فاکتور با خطا مواجه شد",
-            caption: error.response.data.message,
-            icon: "report_problem",
-          });
-        });
-    },
     deleteInvoice(id) {
       api
         .delete("/Invoice/" + id)
@@ -316,47 +294,13 @@ export default {
           });
         });
     },
-    addNewInvoice() {
-      api
-        .post("/Invoice", {
-          name: this.invoiceNameToAdd,
-          fee: this.invoiceFeeToAdd,
-        })
-        .then((response) => {
-          this.$q.notify({
-            progress: true,
-            color: "positive",
-            position: "top",
-            message: "ثبت فاکتور با موفقیت انجام شد",
-            icon: "check_circle",
-          });
 
-          api
-            .get("/Invoice/list")
-            .then((response) => {
-              this.invoices = response.data;
-            })
-            .catch(() => {
-              this.$q.notify({
-                progress: true,
-                color: "negative",
-                position: "top",
-                message: "به روزرسانی لیست فاکتورها با خطا مواجه شد. ",
-                caption: error.response.data.message,
-                icon: "report_problem",
-              });
-            });
-        })
-        .catch((error) => {
-          this.$q.notify({
-            progress: true,
-            color: "negative",
-            position: "top",
-            message: "ثبت فاکتور با خطا مواجه شد. ",
-            caption: error.response.data.message,
-            icon: "report_problem",
-          });
-        });
+    gotoUpdateInvoicePage(invoiceNumber) {
+      this.$router.push("/Invoices/Update/" + invoiceNumber);
+    },
+
+    gotoAddNewInvoicePage() {
+      this.$router.push("/Invoices/AddNew");
     },
 
     clearForm() {
@@ -366,7 +310,7 @@ export default {
     showInvoiceRows(id) {
       this.invoiceRowsToShow = [];
       const invoice = this.invoices.find((invoice) => invoice.id == id);
-      this.invoiceRowsToShow=invoice.invoiceRows;
+      this.invoiceRowsToShow = invoice.invoiceRows;
       this.invoiceRowsShown = true;
     },
   },
