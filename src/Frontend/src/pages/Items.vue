@@ -111,7 +111,6 @@
 
 <script>
 import { api } from "boot/axios";
-import { useQuasar } from "quasar";
 
 export default {
   data() {
@@ -122,7 +121,7 @@ export default {
       columns: [
         { name: "name", align: "left", label: "نام کالا", field: "Name" },
         { name: "fee", align: "left", label: "قیمت واحد", field: "Fee" },
-        { name: "delete", align: "left", label: "حذف" },
+        { name: "operations", align: "left", label: "" },
       ],
     };
   },
