@@ -8,11 +8,11 @@ using SIM.Application.Messages;
 
 namespace SIM.Application.Common.Validator.Items
 {
-    public class AddNewInvoiceCommandValidator : AbstractValidator<AddNewItemCommand>
+    public class AddNewItemCommandValidator : AbstractValidator<AddNewItemCommand>
     {
         private readonly ISIMContext _context;
 
-        public AddNewInvoiceCommandValidator(ISIMContext context)
+        public AddNewItemCommandValidator(ISIMContext context)
         {
             _context = context;
             CascadeMode = CascadeMode.Stop;
