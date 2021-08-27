@@ -3,6 +3,8 @@
 </template>
 
 <script>
+import { api } from "boot/axios";
+
 export default {
   methods: {
     updateInvoice(id) {
