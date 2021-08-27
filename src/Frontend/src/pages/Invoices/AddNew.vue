@@ -6,220 +6,241 @@
       </div>
     </div>
     <q-form @submit="addNewInvoice" class="q-pa-md">
-      <div class="row">
-        <div class="col q-pa-md">
-          <q-input
-            v-model="number"
-            label="شماره فاکتور *"
-            lazy-rules
-            readonly
-            filled
-            :rules="[
-              (val) => (val && val > 0) || 'نوشتن مقدار این فیلد ضروری است',
-            ]"
-          />
-        </div>
-        <div class="col q-pa-md">
-          <q-input
-            v-model="buyerName"
-            label="نام خریدار *"
-            lazy-rules
-            :rules="[
-              (val) =>
-                (val && val.length > 0) || 'نوشتن مقدار این فیلد ضروری است',
-            ]"
-          />
-        </div>
-        <div class="col q-pa-md">
-          <q-input filled v-model="createdOn" mask="date" :rules="['date']">
-            <template v-slot:append>
-              <q-icon name="event" class="cursor-pointer">
-                <q-popup-proxy
-                  ref="qDateProxy"
-                  transition-show="scale"
-                  transition-hide="scale"
-                >
-                  <q-date
-                    v-model="createdOn"
-                    mask="YYYY/MM/DD"
-                    calendar="persian"
-                    today-btn
-                  >
-                    <div class="row items-center justify-end">
-                      <q-btn v-close-popup label="Close" color="primary" flat />
-                    </div>
-                  </q-date>
-                </q-popup-proxy>
-              </q-icon>
-            </template>
-          </q-input>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col q-pa-md">
-          <q-input
-            type="number"
-            v-model.number="totalPrice"
-            label="جمع کل *"
-            lazy-rules
-            readonly
-            filled
-            :rules="[(val) => (val && val >= 0) || 'مقدار اشتباه است.']"
-          />
-        </div>
-        <div class="col q-pa-md">
-          <q-input
-            type="number"
-            v-model.number="totalDiscount"
-            label="جمع تخفیف *"
-            lazy-rules
-            readonly
-            filled
-            :rules="[(val) => (val && val >= 0) || 'مقدار اشتباه است.']"
-          />
-        </div>
-        <div class="col q-pa-md">
-          <q-input
-            type="number"
-            v-model.number="payablePrice"
-            label="قابل پرداخت *"
-            lazy-rules
-            readonly
-            filled
-            :rules="[(val) => (val && val >= 0) || 'مقدار اشتباه است.']"
-          />
-        </div>
-      </div>
-      <div class="row">
-        <div class="col q-pa-md">
-          <q-input v-model="description" label="توضیحات" />
-        </div>
-      </div>
-      <div class="row">
-        <q-list>
-          <q-item v-for="row in invoiceRows" :key="row.key">
-            <q-item-section>
-              <q-select
-                padding
-                dense
-                v-model="row.itemName"
-                :options="allItems"
-                option-value="name"
-                option-label="name"
-                emit-value
-                map-optionsإ
-                label="کالا"
-                @update:model-value="
-                  resetItemNumbers(row.key);
-                  refreshAllPrices();
-                "
-              />
-            </q-item-section>
-            <q-item-section>
+      <q-card class="my-card" bordered>
+        <q-card-section>
+          <div class="text-h6">سربرگ فاکتور</div>
+          <div class="row">
+            <div class="col q-pa-md">
               <q-input
-                type="number"
-                v-model.number="row.quantity"
-                label="تعداد *"
+                v-model="number"
+                label="شماره فاکتور *"
                 lazy-rules
-                :rules="[(val) => (val && val >= 0) || 'مقدار اشتباه است.']"
-                @update:model-value="refreshAllPrices()"
+                readonly
+                filled
+                :rules="[
+                  (val) => (val && val > 0) || 'نوشتن مقدار این فیلد ضروری است',
+                ]"
               />
-            </q-item-section>
-            <q-item-section>
+            </div>
+            <div class="col q-pa-md">
               <q-input
-                type="number"
-                v-model.number="row.fee"
-                label="قیمت واحد *"
-                lazy-rules
-                :rules="[(val) => val >= 0 || 'مقدار اشتباه است.']"
-                @update:model-value="refreshAllPrices()"
-              />
-            </q-item-section>
-            <q-item-section>
-              <q-input
-                type="number"
-                v-model.number="row.discountPercent"
-                label="درصد تخفیف *"
+                v-model="buyerName"
+                label="نام خریدار *"
                 lazy-rules
                 :rules="[
-                  (val) => (val >= 0 && val <= 100) || 'مقدار اشتباه است.',
+                  (val) =>
+                    (val && val.length > 0) || 'نوشتن مقدار این فیلد ضروری است',
                 ]"
-                @update:model-value="refreshAllPrices()"
               />
-            </q-item-section>
-            <q-item-section>
-              <q-input
-                type="number"
-                v-model.number="row.feeAfterDiscount"
-                label="قیمت واحد با تخفیف *"
-                lazy-rules
-                readonly
-                filled
-                :rules="[(val) => val >= 0 || 'مقدار اشتباه است.']"
-              />
-            </q-item-section>
-            <q-item-section>
-              <q-input
-                type="number"
-                v-model.number="row.totalPriceBeforeDiscount"
-                label="سر جمع بدون تخفیف *"
-                lazy-rules
-                readonly
-                filled
-                :rules="[(val) => val >= 0 || 'مقدار اشتباه است.']"
-              />
-            </q-item-section>
-            <q-item-section>
-              <q-input
-                type="number"
-                v-model.number="row.payablePrice"
-                label="سر جمع با تخفیف *"
-                lazy-rules
-                readonly
-                filled
-                :rules="[(val) => val >= 0 || 'مقدار اشتباه است.']"
-              />
-            </q-item-section>
-            <q-item-section>
-              <q-input
-                type="number"
-                v-model.number="row.feeDiscountPrice"
-                label="سود هر واحد *"
-                lazy-rules
-                readonly
-                filled
-                :rules="[(val) => val >= 0 || 'مقدار اشتباه است.']"
-              />
-            </q-item-section>
-            <q-item-section>
-              <q-input
-                type="number"
-                v-model.number="row.totalDiscountPrice"
-                label="جمع سود *"
-                lazy-rules
-                readonly
-                filled
-                :rules="[(val) => val >= 0 || 'مقدار اشتباه است.']"
-              />
-            </q-item-section>
+            </div>
+            <div class="col q-pa-md">
+              <q-input filled v-model="createdOn" mask="date" :rules="['date']">
+                <template v-slot:append>
+                  <q-icon name="event" class="cursor-pointer">
+                    <q-popup-proxy
+                      ref="qDateProxy"
+                      transition-show="scale"
+                      transition-hide="scale"
+                    >
+                      <q-date
+                        v-model="createdOn"
+                        mask="YYYY/MM/DD"
+                        calendar="persian"
+                        today-btn
+                      >
+                        <div class="row items-center justify-end">
+                          <q-btn
+                            v-close-popup
+                            label="Close"
+                            color="primary"
+                            flat
+                          />
+                        </div>
+                      </q-date>
+                    </q-popup-proxy>
+                  </q-icon>
+                </template>
+              </q-input>
+            </div>
+          </div>
 
-            <q-item-section side padding>
+          <div class="row">
+            <div class="col q-pa-md">
+              <q-input v-model="description" label="توضیحات" />
+            </div>
+          </div>
+        </q-card-section>
+      </q-card>
+
+      <q-card class="my-card" bordered>
+        <q-card-section>
+          <div class="text-h6">اقلام فاکتور</div>
+          <div class="row">
+            <q-list>
+              <q-item v-for="row in invoiceRows" :key="row.key">
+                <q-item-section>
+                  <q-select
+                    padding
+                    dense
+                    v-model="row.itemName"
+                    :options="allItems"
+                    option-value="name"
+                    option-label="name"
+                    emit-value
+                    map-optionsإ
+                    label="کالا"
+                    @update:model-value="
+                      resetItemNumbers(row.key);
+                      refreshAllPrices();
+                    "
+                  />
+                </q-item-section>
+                <q-item-section>
+                  <q-input
+                    type="number"
+                    v-model.number="row.quantity"
+                    label="تعداد *"
+                    lazy-rules
+                    :rules="[(val) => (val && val >= 0) || 'مقدار اشتباه است.']"
+                    @update:model-value="refreshAllPrices()"
+                  />
+                </q-item-section>
+                <q-item-section>
+                  <q-input
+                    type="number"
+                    v-model.number="row.fee"
+                    label="قیمت واحد *"
+                    lazy-rules
+                    :rules="[(val) => val >= 0 || 'مقدار اشتباه است.']"
+                    @update:model-value="refreshAllPrices()"
+                  />
+                </q-item-section>
+                <q-item-section>
+                  <q-input
+                    type="number"
+                    v-model.number="row.discountPercent"
+                    label="درصد تخفیف *"
+                    lazy-rules
+                    :rules="[
+                      (val) => (val >= 0 && val <= 100) || 'مقدار اشتباه است.',
+                    ]"
+                    @update:model-value="refreshAllPrices()"
+                  />
+                </q-item-section>
+                <q-item-section>
+                  <q-input
+                    type="number"
+                    v-model.number="row.feeAfterDiscount"
+                    label="قیمت واحد با تخفیف *"
+                    lazy-rules
+                    readonly
+                    filled
+                    :rules="[(val) => val >= 0 || 'مقدار اشتباه است.']"
+                  />
+                </q-item-section>
+                <q-item-section>
+                  <q-input
+                    type="number"
+                    v-model.number="row.totalPriceBeforeDiscount"
+                    label="سر جمع بدون تخفیف *"
+                    lazy-rules
+                    readonly
+                    filled
+                    :rules="[(val) => val >= 0 || 'مقدار اشتباه است.']"
+                  />
+                </q-item-section>
+                <q-item-section>
+                  <q-input
+                    type="number"
+                    v-model.number="row.payablePrice"
+                    label="سر جمع با تخفیف *"
+                    lazy-rules
+                    readonly
+                    filled
+                    :rules="[(val) => val >= 0 || 'مقدار اشتباه است.']"
+                  />
+                </q-item-section>
+                <q-item-section>
+                  <q-input
+                    type="number"
+                    v-model.number="row.feeDiscountPrice"
+                    label="سود هر واحد *"
+                    lazy-rules
+                    readonly
+                    filled
+                    :rules="[(val) => val >= 0 || 'مقدار اشتباه است.']"
+                  />
+                </q-item-section>
+                <q-item-section>
+                  <q-input
+                    type="number"
+                    v-model.number="row.totalDiscountPrice"
+                    label="جمع سود *"
+                    lazy-rules
+                    readonly
+                    filled
+                    :rules="[(val) => val >= 0 || 'مقدار اشتباه است.']"
+                  />
+                </q-item-section>
+
+                <q-item-section side padding>
+                  <q-btn
+                    icon="delete"
+                    color="negative"
+                    @click="deleteRow(row.key)"
+                  />
+                </q-item-section>
+              </q-item>
+            </q-list>
+          </div>
+          <div class="row">
+            <div class="col q-pa-md">
               <q-btn
-                icon="delete"
-                color="negative"
-                @click="deleteRow(row.key)"
+                label="افزودن کالا به فاکتور"
+                color="secondary"
+                @click="addRow"
               />
-            </q-item-section>
-          </q-item>
-        </q-list>
-      </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col q-pa-md">
+              <q-input
+                type="number"
+                v-model.number="totalPrice"
+                label="جمع کل *"
+                lazy-rules
+                readonly
+                filled
+                :rules="[(val) => (val && val >= 0) || 'مقدار اشتباه است.']"
+              />
+            </div>
+            <div class="col q-pa-md">
+              <q-input
+                type="number"
+                v-model.number="totalDiscount"
+                label="جمع تخفیف *"
+                lazy-rules
+                readonly
+                filled
+                :rules="[(val) => (val && val >= 0) || 'مقدار اشتباه است.']"
+              />
+            </div>
+            <div class="col q-pa-md">
+              <q-input
+                type="number"
+                v-model.number="payablePrice"
+                label="قابل پرداخت *"
+                lazy-rules
+                readonly
+                filled
+                :rules="[(val) => (val && val >= 0) || 'مقدار اشتباه است.']"
+              />
+            </div>
+          </div>
+        </q-card-section>
+      </q-card>
       <div class="row">
         <div class="col q-pa-md">
-          <q-btn
-            label="افزودن کالا به فاکتور"
-            color="secondary"
-            @click="addRow"
-          />
           <q-btn label="ثبت فاکتور" type="submit" color="primary" />
         </div>
       </div>
