@@ -66,7 +66,7 @@
                   push
                   color="primary"
                   icon-right="print"
-                  @click="printInvoice(props.row.id)"
+                  @click="printInvoice(props.row.number)"
                 />
                 <q-btn
                   outline
@@ -297,6 +297,10 @@ export default {
 
     gotoUpdateInvoicePage(invoiceNumber) {
       this.$router.push("/Invoices/Update/" + invoiceNumber);
+    },
+
+    printInvoice(invoiceNumber) {
+      this.$router.push("/Invoices/Print/" + invoiceNumber);
     },
 
     gotoAddNewInvoicePage() {

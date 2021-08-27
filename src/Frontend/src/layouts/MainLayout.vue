@@ -1,6 +1,6 @@
 <template>
   <q-layout class="persian-font" view="lHh Lpr lFf">
-    <q-header elevated>
+    <q-header class="print-hide" elevated>
       <q-toolbar>
         <q-btn
           flat
@@ -23,7 +23,7 @@
       v-model="leftDrawerOpen"
       show-if-above
       bordered
-      class="bg-grey-1"
+      class="bg-grey-1 print-hide"
     >
       <q-list>
         <q-item-label

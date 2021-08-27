@@ -9,6 +9,7 @@ const routes = [
       { path: '/Invoices', component: () => import('src/pages/Invoices/List.vue') },
       { path: '/Invoices/AddNew', component: () => import('src/pages/Invoices/AddNew.vue') },
       { path: '/Invoices/Update/:id', component: () => import('src/pages/Invoices/Update.vue') },
+      { path: '/Invoices/Print/:id', component: () => import('src/pages/Invoices/Print.vue') },
     ]
   },
   
