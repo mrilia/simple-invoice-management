@@ -90,7 +90,34 @@
                   autofocus
                   counter
                   @keyup.enter="scope.set"
-                />
+                  mask="date"
+                  :rules="['date']"
+                >
+                  <template v-slot:append>
+                    <q-icon name="event" class="cursor-pointer">
+                      <q-popup-proxy
+                        ref="qDateProxy"
+                        transition-show="scale"
+                        transition-hide="scale"
+                      >
+                        <q-date
+                          v-model="scope.value"
+                          calendar="persian"
+                          today-btn
+                        >
+                          <div class="row items-center justify-end">
+                            <q-btn
+                              v-close-popup
+                              label="Close"
+                              color="primary"
+                              flat
+                            />
+                          </div>
+                        </q-date>
+                      </q-popup-proxy>
+                    </q-icon>
+                  </template>
+                </q-input>
               </q-popup-edit>
             </q-td>
             <q-td key="buyerName" :props="props">
@@ -138,10 +165,25 @@
             </q-td>
             <q-td>
               <q-btn-group outline>
-                <q-btn outline color="negative" icon-right="delete" @click="deleteInvoice(props.row.id)"/>
-                <q-btn outline color="primary" icon-right="print" @click="printInvoice(props.row.id)"/>
-                <q-btn outline color="accent" icon-right="list" @click="showInvoiceRows(props.row.id)"/>
-              </q-btn-group>              
+                <q-btn
+                  outline
+                  color="negative"
+                  icon-right="delete"
+                  @click="deleteInvoice(props.row.id)"
+                />
+                <q-btn
+                  outline
+                  color="primary"
+                  icon-right="print"
+                  @click="printInvoice(props.row.id)"
+                />
+                <q-btn
+                  outline
+                  color="secondary"
+                  icon-right="list"
+                  @click="showInvoiceRows(props.row.id)"
+                />
+              </q-btn-group>
             </q-td>
           </q-tr>
         </template>
@@ -156,7 +198,7 @@ import { api } from "boot/axios";
 export default {
   data() {
     return {
-      invoiceNameToAdd: "",
+      invoiceNameToAdd: "2021/10/10",
       invoiceFeeToAdd: null,
       invoices: [],
       columns: [
