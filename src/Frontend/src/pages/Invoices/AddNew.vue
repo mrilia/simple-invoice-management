@@ -335,7 +335,9 @@ export default {
       this.payablePrice = totalPayable;
     },
     deleteRow(rowKey) {
-      var rowIndex = this.getRowIndex(rowKey);
+      var rowIndex = this.invoiceRows.findIndex(function (o) {
+        return o.key === rowKey;
+      });
       if (rowIndex !== -1) this.invoiceRows.splice(rowIndex, 1);
     },
     addNewInvoice() {
