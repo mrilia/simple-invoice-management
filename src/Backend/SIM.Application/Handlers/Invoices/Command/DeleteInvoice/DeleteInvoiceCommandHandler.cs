@@ -36,7 +36,9 @@ namespace SIM.Application.Handlers.Invoices.Command.Delete
 
         private async Task<Invoice> GetInvoiceAsync(DeleteInvoiceCommand request, CancellationToken cancellationToken)
         {
-            return await _context.Invoices.SingleOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
+            return await _context.Invoices
+                .Include(e => e.InvoiceRows)
+                .SingleOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
         }
         
     }

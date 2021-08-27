@@ -34,10 +34,11 @@ namespace SIM.Application.Handlers.Invoices.Queries
 
             if (!string.IsNullOrWhiteSpace(request.Query))
             {
-                invoices = invoices.Where(x => x.BuyerName.Contains(request.Query));
+                invoices = invoices.Where(x => x.BuyerName.Contains(request.Query))
+                    .Include(e=>e.InvoiceRows);
             }
 
-            return _mapper.Map<List<InvoiceDto>>(await invoices.ToListAsync(cancellationToken));
+            return _mapper.Map<List<InvoiceDto>>(await invoices.Include(o=>o.InvoiceRows).ToListAsync(cancellationToken));
         }
     }
 }

@@ -14,7 +14,7 @@ namespace SIM.Application.Handlers.Invoices.Dto
         public long TotalDiscount { get; set; }
         public long PayablePrice { get; set; }
 
-        public List<InvoiceRowDto> Rows { get; set; }
+        public List<InvoiceRowDto> InvoiceRows { get; set; }
     }
 
     public class InvoiceRowDto
@@ -30,5 +30,6 @@ namespace SIM.Application.Handlers.Invoices.Dto
         public long PayablePrice { get; set; }
         public long FeeDiscountPrice { get; set; }
         public long TotalDiscountPrice { get; set; }
+
     }
 }

@@ -15,7 +15,7 @@ namespace SIM.Application.Handlers.Invoices.Command.Update
         public long TotalDiscount { get; set; }
         public long PayablePrice { get; set; }
 
-        public List<RowDtoToUpdate> Rows { get; set; }
+        public List<RowDtoToUpdate> InvoiceRows { get; set; }
     }
 
     public class RowDtoToUpdate

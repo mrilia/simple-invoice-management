@@ -48,13 +48,13 @@ namespace SIM.Application.Common.Validator.Invoices
         private bool ValidRowsPrices(AddNewInvoiceCommand newInvoiceToCheck)
         {
             long rowsTotalPayaplePrice = 0;
-            newInvoiceToCheck.Rows.ForEach(row => rowsTotalPayaplePrice += row.PayablePrice);
+            newInvoiceToCheck.InvoiceRows.ForEach(row => rowsTotalPayaplePrice += row.PayablePrice);
 
             long rowsTotalDiscountPrice = 0;
-            newInvoiceToCheck.Rows.ForEach(row => rowsTotalDiscountPrice += row.TotalDiscountPrice);
+            newInvoiceToCheck.InvoiceRows.ForEach(row => rowsTotalDiscountPrice += row.TotalDiscountPrice);
 
             long rowsTotalPrice = 0;
-            newInvoiceToCheck.Rows.ForEach(row => rowsTotalPrice += row.TotalPriceBeforeDiscount);
+            newInvoiceToCheck.InvoiceRows.ForEach(row => rowsTotalPrice += row.TotalPriceBeforeDiscount);
 
             return rowsTotalPayaplePrice == newInvoiceToCheck.PayablePrice
                 && rowsTotalDiscountPrice == newInvoiceToCheck.TotalDiscount

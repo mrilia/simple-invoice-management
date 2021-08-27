@@ -29,7 +29,9 @@ namespace SIM.Application.Handlers.Invoices.Queries
 
         public async Task<Result<InvoiceDto>> Handle(GetInvoiceQuery request, CancellationToken cancellationToken)
         {
-            var invoice = await _context.Invoices.SingleOrDefaultAsync(x => x.Number == request.Number,
+            var invoice = await _context.Invoices
+                .Include(e => e.InvoiceRows)
+                .FirstAsync(x => x.Number == request.Number,
                 cancellationToken);
 
             if (invoice is null)

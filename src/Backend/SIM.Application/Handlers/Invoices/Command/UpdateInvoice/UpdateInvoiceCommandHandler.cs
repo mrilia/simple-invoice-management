@@ -39,7 +39,9 @@ namespace SIM.Application.Handlers.Invoices.Command.Update
 
         private async Task<Invoice> GetInvoiceAsync(UpdateInvoiceCommand request, CancellationToken cancellationToken)
         {
-            return await _context.Invoices.SingleOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
+            return await _context.Invoices
+                .Include(e => e.InvoiceRows)
+                .SingleOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
         }
         
     }

@@ -20,7 +20,7 @@ namespace SIM.Application.Handlers.Invoices.Command.AddNew
         public long TotalDiscount { get; set; }
         public long PayablePrice { get; set; }
 
-        public List<RowDto> Rows { get; set; }
+        public List<RowDto> InvoiceRows { get; set; }
 
     }
     public class RowDto

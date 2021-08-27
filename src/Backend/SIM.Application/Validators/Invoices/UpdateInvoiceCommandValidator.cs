@@ -20,7 +20,7 @@ namespace SIM.Application.Common.Validator.Invoices
             RuleFor(dto => dto.Id)
                 .NotEmpty().WithMessage(ResponseMessage.IdIsRequired)
                 .NotNull().WithMessage(ResponseMessage.IdIsRequired)
-                .MustAsync(Exists).WithMessage(ResponseMessage.ItemIdNotExists);
+                .MustAsync(Exists).WithMessage(ResponseMessage.InvoiceIdNotExists);
 
             RuleFor(dto => dto.Number)
                 .NotEmpty().WithMessage(ResponseMessage.NumberIsRequired)
@@ -53,13 +53,13 @@ namespace SIM.Application.Common.Validator.Invoices
         private bool ValidRowsPrices(UpdateInvoiceCommand invoiceToCheck)
         {
             long rowsTotalPayaplePrice = 0;
-            invoiceToCheck.Rows.ForEach(row => rowsTotalPayaplePrice += row.PayablePrice);
+            invoiceToCheck.InvoiceRows.ForEach(row => rowsTotalPayaplePrice += row.PayablePrice);
 
             long rowsTotalDiscountPrice = 0;
-            invoiceToCheck.Rows.ForEach(row => rowsTotalDiscountPrice += row.TotalDiscountPrice);
+            invoiceToCheck.InvoiceRows.ForEach(row => rowsTotalDiscountPrice += row.TotalDiscountPrice);
 
             long rowsTotalPrice = 0;
-            invoiceToCheck.Rows.ForEach(row => rowsTotalPrice += row.TotalPriceBeforeDiscount);
+            invoiceToCheck.InvoiceRows.ForEach(row => rowsTotalPrice += row.TotalPriceBeforeDiscount);
 
             return rowsTotalPayaplePrice == invoiceToCheck.PayablePrice
                 && rowsTotalDiscountPrice == invoiceToCheck.TotalDiscount
@@ -68,7 +68,7 @@ namespace SIM.Application.Common.Validator.Invoices
 
         private async Task<bool> Exists(long idToCheck, CancellationToken cancellationToken)
         {
-            if (!await _context.Items.AnyAsync(x => x.Id == idToCheck, cancellationToken))
+            if (!await _context.Invoices.AnyAsync(x => x.Id == idToCheck, cancellationToken))
                 return false;
 
             return true;

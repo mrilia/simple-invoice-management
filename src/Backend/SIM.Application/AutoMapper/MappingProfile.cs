@@ -23,11 +23,11 @@ namespace SIM.Application.AutoMapper
             CreateMap<UpdateItemCommand, Item>();
 
             CreateMap<Invoice, InvoiceDto>();
-            CreateMap<InvoiceRow, RowDto>();
             CreateMap<AddNewInvoiceCommand, Invoice>();
             CreateMap<UpdateInvoiceCommand, Invoice>();
-
-
+            CreateMap<InvoiceRow, InvoiceRowDto>();
+            CreateMap<RowDto, InvoiceRow>();
+            CreateMap<RowDtoToUpdate, InvoiceRow>();
         }
     }
 }
