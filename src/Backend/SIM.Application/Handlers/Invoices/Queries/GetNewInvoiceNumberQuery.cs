@@ -29,9 +29,15 @@ namespace SIM.Application.Handlers.Invoices.Queries
 
         public async Task<Result<InvoiceNumberDto>> Handle(GetNewInvoiceNumberQuery request, CancellationToken cancellationToken)
         {
-            var maxNumber = await _context.Invoices
+            long maxNumber=0;
+            try{
+               maxNumber = await _context.Invoices
                 .MaxAsync(x => x.Number,
-                cancellationToken);
+                cancellationToken); 
+            }
+            catch{
+
+            }
 
             maxNumber++;
 
