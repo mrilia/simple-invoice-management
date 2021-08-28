@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using SIM.Api.Installer;
 using SIM.Application;
 using SIM.Persistence;
+using SIM.Persistence.Context;
 
 namespace SIM.Api
 {
@@ -36,6 +37,12 @@ namespace SIM.Api
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SIM.Api v1"));
             }
+
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+      {
+            var context = serviceScope.ServiceProvider.GetRequiredService<SIMContext>();
+            context.Database.EnsureCreated();
+      }
 
             app.UseHttpsRedirection();
             app.UseRouting();
