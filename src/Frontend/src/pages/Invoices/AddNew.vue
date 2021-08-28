@@ -211,7 +211,7 @@
                 lazy-rules
                 readonly
                 filled
-                :rules="[(val) => (val && val >= 0) || 'مقدار اشتباه است.']"
+                :rules="[(val) => (val >= 0) || 'مقدار اشتباه است.']"
               />
             </div>
             <div class="col q-pa-md">
@@ -222,7 +222,7 @@
                 lazy-rules
                 readonly
                 filled
-                :rules="[(val) => (val && val >= 0) || 'مقدار اشتباه است.']"
+                :rules="[(val) => (val >= 0) || 'مقدار اشتباه است.']"
               />
             </div>
             <div class="col q-pa-md">
@@ -233,7 +233,7 @@
                 lazy-rules
                 readonly
                 filled
-                :rules="[(val) => (val && val >= 0) || 'مقدار اشتباه است.']"
+                :rules="[(val) => (val >= 0) || 'مقدار اشتباه است.']"
               />
             </div>
           </div>
